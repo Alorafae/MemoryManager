@@ -12,6 +12,9 @@ typedef class MemManager
     MemManager();
     ~MemManager();
 
+    bool Alloc();
+    bool Dealloc();
+
     bool AddObjType();
 
   private:
