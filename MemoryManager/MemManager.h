@@ -1,10 +1,18 @@
 #pragma once
 
+#include <map>
+#include <string>
+
 /*
 pagesize will be objects/page
 64 byte align everything
 maybe add threading
 */
+
+typedef class PageList
+{
+
+};
 
 typedef class MemManager
 {
@@ -18,7 +26,9 @@ typedef class MemManager
     bool AddObjType();
 
   private:
-
+    // strings will be our keys
+    // the void* will point to the actual page files
+    std::map<std::string, void*> objectPageMap_;
 
 };
 
