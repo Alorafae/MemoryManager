@@ -11,7 +11,11 @@ maybe add threading
 
 typedef class PageList
 {
+  public:
 
+
+  private:
+    void* pageFiles_;
 };
 
 typedef class MemManager
@@ -27,8 +31,7 @@ typedef class MemManager
 
   private:
     // strings will be our keys
-    // the void* will point to the actual page files
-    std::map<std::string, void*> objectPageMap_;
+    std::map<std::string, PageList> objectPageMap_;
 
 };
 
