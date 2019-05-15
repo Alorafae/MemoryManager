@@ -18,3 +18,10 @@ void NewTest(unsigned nObjs)
     delete *iter;
   }
 }
+
+void MMAllocTest(MemManager &mm, unsigned nObjs)
+{
+  PERF
+
+
+}

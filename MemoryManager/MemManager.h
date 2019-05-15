@@ -35,8 +35,8 @@ typedef class MemManager
     MemManager();
     ~MemManager();
 
-    bool Alloc();
-    bool Dealloc();
+    MMHandle Alloc(std::string type, size_t objSize);
+    bool Dealloc(MMHandle handle);
 
     bool AddObjType();
 
