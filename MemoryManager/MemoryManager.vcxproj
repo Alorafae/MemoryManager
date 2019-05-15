@@ -117,10 +117,15 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MemManager.cpp" />
+    <ClCompile Include="MockObj.cpp" />
     <ClCompile Include="MockObj.h" />
+    <ClCompile Include="PerfTestFunctions.cpp" />
+    <ClCompile Include="Profiler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MemManager.h" />
+    <ClInclude Include="PerfTestFunctions.h" />
+    <ClInclude Include="Profiler.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

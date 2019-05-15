@@ -18,6 +18,17 @@ typedef class PageList
     void* pageFiles_;
 };
 
+typedef class MMHandle
+{
+  public:
+    MMHandle();
+    ~MMHandle();
+
+
+  private:
+    void* data_;
+};
+
 typedef class MemManager
 {
   public:
