@@ -3,6 +3,7 @@
 #include <map>
 #include <string>
 
+#include <list>
 #include <vector>
 
 /*
@@ -28,6 +29,11 @@ class PageList
 
   private:
     std::vector<PageFile> pageFiles_;
+
+    // need a free list
+    std::list<void*> freeList_;
+    // might as well do a in use list too
+    std::list<void*> usedList_;
 
     //void* pageFiles_;
     unsigned pages_;

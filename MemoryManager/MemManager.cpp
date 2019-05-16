@@ -23,7 +23,7 @@ MMHandle MemManager::Alloc(std::string type, size_t objSize)
   }
   else // pages already exist for this object type
   {
-
+    auto iter = objectPageMap_[type];
   }
 
   return MMHandle();
