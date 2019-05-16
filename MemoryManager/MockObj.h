@@ -1,6 +1,6 @@
 #pragma once
 
-typedef class MockModel
+class MockModel
 {
   public:
     MockModel();

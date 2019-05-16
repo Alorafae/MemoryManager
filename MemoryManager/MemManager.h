@@ -3,22 +3,37 @@
 #include <map>
 #include <string>
 
+#include <vector>
+
 /*
 pagesize will be objects/page
 64 byte align everything
 maybe add threading
 */
 
-typedef class PageList
+struct PageFile
 {
-  public:
-
-
-  private:
-    void* pageFiles_;
+  void* page = NULL;
+  unsigned inUse = 0;
 };
 
-typedef class MMHandle
+class PageList
+{
+  public:
+    PageList();
+    ~PageList();
+
+    void CreatePage(size_t size);
+    void DeletePage();
+
+  private:
+    std::vector<PageFile> pageFiles_;
+
+    //void* pageFiles_;
+    unsigned pages_;
+};
+
+class MMHandle
 {
   public:
     MMHandle();
@@ -29,7 +44,7 @@ typedef class MMHandle
     void* data_;
 };
 
-typedef class MemManager
+class MemManager
 {
   public:
     MemManager();
@@ -42,11 +57,11 @@ typedef class MemManager
 
   private:
     // strings will be our keys
-    std::map<std::string, PageList> objectPageMap_;
-
+    std::map<std::string, PageList*> objectPageMap_;
+    unsigned ObjsPerPage = 128;
 };
 
-typedef class ObjManager
+class ObjManager
 {
   public:
     ObjManager();

@@ -21,16 +21,13 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MockObj.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="PerfTestFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MockObj.cpp">
+    <ClCompile Include="Profiler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Profiler.cpp">
+    <ClCompile Include="MockObj.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -42,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Profiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MockObj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

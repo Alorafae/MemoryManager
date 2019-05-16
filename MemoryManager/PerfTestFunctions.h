@@ -2,7 +2,6 @@
 #pragma once
 
 #include "Profiler.h"
-#include "MockObj.h"
 #include "MemManager.h"
 
 void NewTest(unsigned nObjs);

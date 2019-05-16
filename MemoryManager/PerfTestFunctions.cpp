@@ -1,5 +1,6 @@
 
 #include "PerfTestFunctions.h"
+#include "MockObj.h"
 #include <vector>
 
 void NewTest(unsigned nObjs)
@@ -21,7 +22,7 @@ void NewTest(unsigned nObjs)
 
 void MMAllocTest(MemManager &mm, unsigned nObjs)
 {
-  PERF
+  PERF;
 
-
+  mm.Alloc(std::string("MockModel"), sizeof(MockModel));
 }
