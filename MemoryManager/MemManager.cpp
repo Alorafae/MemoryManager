@@ -19,7 +19,7 @@ MMHandle MemManager::Alloc(std::string type, size_t objSize)
   {
     PageList* PL = new PageList;
 
-    PL->CreatePage(ObjsPerPage * objSize);
+    PL->CreatePage(objSize);
 
     objectPageMap_[type] = PL;
   }
@@ -40,14 +40,24 @@ PageList::~PageList()
 }
 
 // only place malloc should be called
-void PageList::CreatePage(size_t size)
+void PageList::CreatePage(size_t size, unsigned ObjPerPage)
 {
-  void* page = malloc(size);
+  // create the raw page
+  void* page = malloc(size * ObjPerPage);
+  memset(page, 0, size * ObjPerPage);
 
   PageFile pf;
   pf.page = page;
 
+  // put the page file into our pagefiles list
   pageFiles_.push_back(pf);
+
+  unsigned char* block = static_cast<unsigned char*>(page);
+  for (unsigned i = 0; i < ObjPerPage; ++i)
+  {
+    freeList_.push_back(block + (i * size));
+  }
+
 }
 
 MMHandle::MMHandle()

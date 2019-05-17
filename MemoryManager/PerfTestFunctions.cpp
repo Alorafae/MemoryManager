@@ -24,5 +24,8 @@ void MMAllocTest(MemManager &mm, unsigned nObjs)
 {
   PERF;
 
-  mm.Alloc(std::string("MockModel"), sizeof(MockModel));
+  MMHandle handle;
+
+  handle = mm.Alloc(std::string("MockModel"), sizeof(MockModel));
+  handle.Data<MockModel>();
 }

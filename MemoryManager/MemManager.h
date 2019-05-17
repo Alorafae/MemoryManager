@@ -12,6 +12,8 @@ pagesize will be objects/page
 maybe add threading
 */
 
+#define DEFAULT_OBJECTS_PER_PAGE 128
+
 struct PageFile
 {
   void* page = NULL;
@@ -24,7 +26,7 @@ class PageList
     PageList();
     ~PageList();
 
-    void CreatePage(size_t size);
+    void CreatePage(size_t size, unsigned ObjPerPage = DEFAULT_OBJECTS_PER_PAGE);
     void DeletePage();
 
   private:
@@ -39,13 +41,14 @@ class PageList
     unsigned pages_;
 };
 
+
 class MMHandle
 {
   public:
     MMHandle();
     MMHandle(std::string type);
     ~MMHandle();
-
+    
     template <typename T>
     T Data();
 
@@ -61,16 +64,16 @@ class MemManager
     ~MemManager();
 
     // maybe instead pass alloc a handle template and instantiate then and there?
-    //void Alloc(MMHandle<T>, size_t objSize);
+    //void Alloc(MMHandle &handle, size_t objSize);
     MMHandle Alloc(std::string type, size_t objSize);
-    bool Dealloc(MMHandle handle);
+    //bool Dealloc(MMHandle handle);
 
     bool AddObjType();
 
   private:
     // strings will be our keys
     std::map<std::string, PageList*> objectPageMap_;
-    unsigned ObjsPerPage = 128;
+    //unsigned ObjsPerPage = DEFAULT_OBJECTS_PER_PAGE;
 };
 
 class ObjManager
