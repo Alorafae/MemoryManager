@@ -12,6 +12,8 @@ MemManager::~MemManager()
 // only place new should be called
 MMHandle MemManager::Alloc(std::string type, size_t objSize)
 {
+  MMHandle handle(type);
+
   // no pages exist for this type yet
   if (objectPageMap_.find(type) == objectPageMap_.end())
   {
@@ -26,7 +28,7 @@ MMHandle MemManager::Alloc(std::string type, size_t objSize)
     auto iter = objectPageMap_[type];
   }
 
-  return MMHandle();
+  return handle;
 }
 
 PageList::PageList()
@@ -50,6 +52,11 @@ void PageList::CreatePage(size_t size)
 
 MMHandle::MMHandle()
 {
+}
+
+MMHandle::MMHandle(std::string type)
+{
+  type_ = type;
 }
 
 MMHandle::~MMHandle()

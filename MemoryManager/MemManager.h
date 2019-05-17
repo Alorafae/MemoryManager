@@ -43,11 +43,15 @@ class MMHandle
 {
   public:
     MMHandle();
+    MMHandle(std::string type);
     ~MMHandle();
 
+    template <typename T>
+    T Data();
 
   private:
     void* data_;
+    std::string type_;
 };
 
 class MemManager
@@ -56,6 +60,8 @@ class MemManager
     MemManager();
     ~MemManager();
 
+    // maybe instead pass alloc a handle template and instantiate then and there?
+    //void Alloc(MMHandle<T>, size_t objSize);
     MMHandle Alloc(std::string type, size_t objSize);
     bool Dealloc(MMHandle handle);
 
@@ -76,3 +82,9 @@ class ObjManager
   private:
 
 };
+
+template<typename T>
+inline T MMHandle::Data()
+{
+  return T();
+}
