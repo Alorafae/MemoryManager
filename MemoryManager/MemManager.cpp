@@ -12,7 +12,7 @@ MemManager::~MemManager()
 // only place new should be called
 MMHandle MemManager::Alloc(std::string type, size_t objSize)
 {
-  MMHandle handle(type);
+  
 
   // no pages exist for this type yet
   if (objectPageMap_.find(type) == objectPageMap_.end())
@@ -22,13 +22,17 @@ MMHandle MemManager::Alloc(std::string type, size_t objSize)
     PL->CreatePage(objSize);
 
     objectPageMap_[type] = PL;
+
+    return MMHandle(type, PL->GetFreeBlock());
   }
   else // pages already exist for this object type
   {
     auto iter = objectPageMap_[type];
+
+    return MMHandle(type, iter->GetFreeBlock());
   }
 
-  return handle;
+  return MMHandle();
 }
 
 PageList::PageList()
@@ -60,13 +64,25 @@ void PageList::CreatePage(size_t size, unsigned ObjPerPage)
 
 }
 
-MMHandle::MMHandle()
+void* PageList::GetFreeBlock()
+{
+  if (freeList_.empty())
+    return nullptr;
+
+  void* block = freeList_.back();
+  freeList_.pop_back();
+
+  return block;
+}
+
+MMHandle::MMHandle() : type_("NO_TYPE"), data_(nullptr)
 {
 }
 
-MMHandle::MMHandle(std::string type)
+MMHandle::MMHandle(std::string type, void * bptr)
 {
   type_ = type;
+  data_ = bptr;
 }
 
 MMHandle::~MMHandle()

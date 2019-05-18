@@ -29,6 +29,8 @@ class PageList
     void CreatePage(size_t size, unsigned ObjPerPage = DEFAULT_OBJECTS_PER_PAGE);
     void DeletePage();
 
+    void* GetFreeBlock();
+
   private:
     std::vector<PageFile> pageFiles_;
 
@@ -46,7 +48,7 @@ class MMHandle
 {
   public:
     MMHandle();
-    MMHandle(std::string type);
+    MMHandle(std::string type, void* bptr);
     ~MMHandle();
     
     template <typename T>
