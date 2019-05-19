@@ -12,8 +12,8 @@ int main(void)
   // like if you know you'll only ever have X number of Y, make all the pages at the start for speed
   MemManager MemMan;
 
-  NewTest(128);
-  MMAllocTest(MemMan, 1);
+  NewTest(1024);
+  MMAllocTest(MemMan, 1024);
 
   PERF_FRAME_END
   PERF_PRINT

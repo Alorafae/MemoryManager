@@ -24,9 +24,16 @@ void MMAllocTest(MemManager &mm, unsigned nObjs)
 {
   PERF;
 
-  MMHandle handle;
+  std::vector<MMHandle> mmHandles;
 
-  handle = mm.Alloc(std::string("MockModel"), sizeof(MockModel));
+  //MMHandle handle;
 
-  handle.Data<MockModel>().Update(1.0f);
+  //handle = mm.Alloc(std::string("MockModel"), sizeof(MockModel));
+
+  for (unsigned i = 0; i < nObjs; ++i)
+  {
+    mmHandles.push_back(mm.Alloc(std::string("MockModel"), sizeof(MockModel)));
+  }
+
+  //handle.Data<MockModel>().Update(1.0f);
 }

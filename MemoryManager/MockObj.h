@@ -14,3 +14,19 @@ class MockModel
     int posy = 0;
     int posz = 0;
 };
+
+class MockTexture
+{
+  public:
+    MockTexture();
+    ~MockTexture();
+
+
+
+  private:
+    unsigned sizeX = 0;
+    unsigned sizeY = 0;
+    unsigned sizeZ = 0;
+};
+
+

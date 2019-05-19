@@ -12,7 +12,7 @@ pagesize will be objects/page
 maybe add threading
 */
 
-#define DEFAULT_OBJECTS_PER_PAGE 128
+#define DEFAULT_OBJECTS_PER_PAGE 1024
 
 struct PageFile
 {
@@ -35,9 +35,9 @@ class PageList
     std::vector<PageFile> pageFiles_;
 
     // need a free list
-    std::list<void*> freeList_;
+    std::vector<void*> freeList_;
     // might as well do a in use list too
-    std::list<void*> usedList_;
+    std::vector<void*> usedList_;
 
     //void* pageFiles_;
     unsigned pages_;

@@ -37,6 +37,7 @@ MMHandle MemManager::Alloc(std::string type, size_t objSize)
 
 PageList::PageList()
 {
+  freeList_.resize(DEFAULT_OBJECTS_PER_PAGE);
 }
 
 PageList::~PageList()
