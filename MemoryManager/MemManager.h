@@ -30,6 +30,7 @@ class PageList
     void DeletePage();
 
     void* GetFreeBlock();
+    void* DelBlock(void* p, size_t size);
 
   private:
     std::vector<PageFile> pageFiles_;
@@ -54,9 +55,13 @@ class MMHandle
     template <typename T>
     T Data();
 
+    void* GetRaw();
+    std::string GetType();
+    size_t GetSize();
   private:
     void* data_;
     std::string type_;
+    size_t size_;
 };
 
 class MemManager
@@ -68,7 +73,7 @@ class MemManager
     // maybe instead pass alloc a handle template and instantiate then and there?
     //void Alloc(MMHandle &handle, size_t objSize);
     MMHandle Alloc(std::string type, size_t objSize);
-    //bool Dealloc(MMHandle handle);
+    void Dealloc(MMHandle handle);
 
     bool AddObjType();
 
