@@ -35,5 +35,10 @@ void MMAllocTest(MemManager &mm, unsigned nObjs)
     mmHandles.push_back(mm.Alloc(std::string("MockModel"), sizeof(MockModel)));
   }
 
+  for (auto iter = mmHandles.begin(); iter != mmHandles.end(); ++iter)
+  {
+    mm.Dealloc(*iter);
+  }
+
   //handle.Data<MockModel>().Update(1.0f);
 }

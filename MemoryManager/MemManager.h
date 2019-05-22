@@ -49,7 +49,7 @@ class MMHandle
 {
   public:
     MMHandle();
-    MMHandle(std::string type, void* bptr);
+    MMHandle(std::string type, void* bptr, size_t size);
     ~MMHandle();
     
     template <typename T>

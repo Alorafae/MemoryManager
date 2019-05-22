@@ -15,6 +15,8 @@ int main(void)
   NewTest(1024);
   MMAllocTest(MemMan, 1024);
 
+  MMAllocTest(MemMan, 1024);
+
   PERF_FRAME_END
   PERF_PRINT
 
