@@ -37,8 +37,27 @@ void MMAllocTest(MemManager &mm, unsigned nObjs)
 
   for (auto iter = mmHandles.begin(); iter != mmHandles.end(); ++iter)
   {
-    mm.Dealloc(*iter);
+     mm.Dealloc(*iter);
   }
 
   //handle.Data<MockModel>().Update(1.0f);
+}
+
+// exact same function as MMAllocTest2, but always runs after original one
+// for performance testing
+void MMAllocTest2(MemManager &mm, unsigned nObjs)
+{
+  PERF;
+
+  std::vector<MMHandle> mmHandles;
+
+  for (unsigned i = 0; i < nObjs; ++i)
+  {
+    mmHandles.push_back(mm.Alloc(std::string("MockModel"), sizeof(MockModel)));
+  }
+
+  for (auto iter = mmHandles.begin(); iter != mmHandles.end(); ++iter)
+  {
+    mm.Dealloc(*iter);
+  }
 }

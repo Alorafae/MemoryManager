@@ -36,15 +36,17 @@ MMHandle MemManager::Alloc(std::string type, size_t objSize)
   return MMHandle();
 }
 
-void MemManager::Dealloc(MMHandle handle)
+bool MemManager::Dealloc(MMHandle handle)
 {
+  PERF
+
   void* p = handle.GetRaw();
   std::string type = handle.GetType();
   size_t size = handle.GetSize();
   
   auto iter = objectPageMap_[type];
 
-  iter->DelBlock(p, size);
+  return iter->DelBlock(p, size);
 }
 
 PageList::PageList()
@@ -80,6 +82,8 @@ void PageList::CreatePage(size_t size, unsigned ObjPerPage)
 
 void* PageList::GetFreeBlock()
 {
+  PERF
+
   if (freeList_.empty())
     return nullptr;
 
@@ -89,13 +93,18 @@ void* PageList::GetFreeBlock()
   return block;
 }
 
-void * PageList::DelBlock(void * p, size_t size)
+bool PageList::DelBlock(void * p, size_t size)
 {
+  PERF
+
   memset(p, 0, size);
 
   freeList_.push_back(p);
 
-  return nullptr;
+  if (DEBUG_PRINT_OUTS)
+    printf("block deleted\n");
+
+  return true;
 }
 
 MMHandle::MMHandle() : type_("NO_TYPE"), data_(nullptr)

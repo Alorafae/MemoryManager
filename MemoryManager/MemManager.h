@@ -13,6 +13,7 @@ maybe add threading
 */
 
 #define DEFAULT_OBJECTS_PER_PAGE 1024
+#define DEBUG_PRINT_OUTS false
 
 struct PageFile
 {
@@ -30,7 +31,7 @@ class PageList
     void DeletePage();
 
     void* GetFreeBlock();
-    void* DelBlock(void* p, size_t size);
+    bool DelBlock(void* p, size_t size);
 
   private:
     std::vector<PageFile> pageFiles_;
@@ -73,7 +74,7 @@ class MemManager
     // maybe instead pass alloc a handle template and instantiate then and there?
     //void Alloc(MMHandle &handle, size_t objSize);
     MMHandle Alloc(std::string type, size_t objSize);
-    void Dealloc(MMHandle handle);
+    bool Dealloc(MMHandle handle);
 
     bool AddObjType();
 
