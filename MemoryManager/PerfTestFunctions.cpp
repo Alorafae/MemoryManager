@@ -26,10 +26,6 @@ void MMAllocTest(MemManager &mm, unsigned nObjs)
 
   std::vector<MMHandle> mmHandles;
 
-  //MMHandle handle;
-
-  //handle = mm.Alloc(std::string("MockModel"), sizeof(MockModel));
-
   for (unsigned i = 0; i < nObjs; ++i)
   {
     mmHandles.push_back(mm.Alloc(std::string("MockModel"), sizeof(MockModel)));
@@ -39,12 +35,10 @@ void MMAllocTest(MemManager &mm, unsigned nObjs)
   {
      mm.Dealloc(*iter);
   }
-
-  //handle.Data<MockModel>().Update(1.0f);
 }
 
 // exact same function as MMAllocTest2, but always runs after original one
-// for performance testing
+// for performance testing subsequent allocations (after memory is allocated)
 void MMAllocTest2(MemManager &mm, unsigned nObjs)
 {
   PERF;
@@ -60,4 +54,22 @@ void MMAllocTest2(MemManager &mm, unsigned nObjs)
   {
     mm.Dealloc(*iter);
   }
+}
+
+void SingleNewTest(void)
+{
+  PERF
+
+  MockModel* model = new MockModel;
+
+  delete model;
+}
+
+void SingleMMAllocTest(MemManager &mm)
+{
+  PERF
+
+  MMHandle model = mm.Alloc("MockModel", sizeof(MockModel));
+
+  mm.Dealloc(model);
 }

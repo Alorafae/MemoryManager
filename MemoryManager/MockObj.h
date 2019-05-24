@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdio.h>
+
 class MockModel
 {
   public:
@@ -29,4 +31,27 @@ class MockTexture
     unsigned sizeZ = 0;
 };
 
+class MockVirtual
+{
+  public:
+    MockVirtual();
+    ~MockVirtual();
+
+    virtual void VFunctionTest();
+  private:
+
+
+};
+
+class MockVirtualInherit : MockVirtual
+{
+  public:
+    MockVirtualInherit();
+    ~MockVirtualInherit();
+
+    virtual void VFunctionTest();
+  private:
+
+
+};
 

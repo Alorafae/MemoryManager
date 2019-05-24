@@ -23,3 +23,37 @@ void MockModel::Render(float dt)
 {
 
 }
+
+MockTexture::MockTexture()
+{
+}
+
+MockTexture::~MockTexture()
+{
+}
+
+MockVirtual::MockVirtual()
+{
+}
+
+MockVirtual::~MockVirtual()
+{
+}
+
+void MockVirtual::VFunctionTest()
+{
+  printf("MockVirtual virtual function executed\n");
+}
+
+MockVirtualInherit::MockVirtualInherit()
+{
+}
+
+MockVirtualInherit::~MockVirtualInherit()
+{
+}
+
+void MockVirtualInherit::VFunctionTest()
+{
+  printf("MockVirtualInherit virtual function executed\n");
+}
