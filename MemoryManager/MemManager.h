@@ -24,6 +24,18 @@ struct PageFile
   unsigned inUse = 0;
 };
 
+struct Node
+{
+  void* next;
+};
+
+/*******************
+
+  page [-----------------------------------]
+  [page start - chunk ptr - chunk - chunk ptr - chunk]
+
+*****************/
+
 class PageList
 {
   public:
@@ -37,8 +49,13 @@ class PageList
     bool DelBlock(void* p, size_t size);
 
   private:
+    // this might can stay a vector since pagefiles will
+    // only happen sparingly but we'll see
     std::vector<PageFile> pageFiles_;
 
+
+    // turn these into internal linked list using pointers
+    // located at the beginning of each "chunk" 
     // need a free list
     std::vector<void*> freeList_;
     // might as well do a in use list too
@@ -66,8 +83,6 @@ class MMHandle
     void* data_;
     const char* type_;
     size_t size_;
-
-    const char* typei_;
 };
 
 class MemManager
