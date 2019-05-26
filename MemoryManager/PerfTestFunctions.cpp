@@ -28,7 +28,7 @@ void MMAllocTest(MemManager &mm, unsigned nObjs)
 
   for (unsigned i = 0; i < nObjs; ++i)
   {
-    mmHandles.push_back(mm.Alloc(std::string("MockModel"), sizeof(MockModel)));
+    mmHandles.push_back(mm.Alloc("MockModel", sizeof(MockModel)));
   }
 
   for (auto iter = mmHandles.begin(); iter != mmHandles.end(); ++iter)
@@ -47,7 +47,7 @@ void MMAllocTest2(MemManager &mm, unsigned nObjs)
 
   for (unsigned i = 0; i < nObjs; ++i)
   {
-    mmHandles.push_back(mm.Alloc(std::string("MockModel"), sizeof(MockModel)));
+    mmHandles.push_back(mm.Alloc("MockModel", sizeof(MockModel)));
   }
 
   for (auto iter = mmHandles.begin(); iter != mmHandles.end(); ++iter)

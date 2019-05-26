@@ -11,7 +11,7 @@ MemManager::~MemManager()
 }
 
 // only place new should be called
-MMHandle MemManager::Alloc(std::string type, size_t objSize)
+MMHandle MemManager::Alloc(const char* type, size_t objSize)
 {
   PERF
 
@@ -41,7 +41,7 @@ bool MemManager::Dealloc(MMHandle handle)
   PERF
 
   void* p = handle.GetRaw();
-  std::string type = handle.GetType();
+  const char* type = handle.GetType();
   size_t size = handle.GetSize();
   
   auto iter = objectPageMap_[type];
@@ -111,7 +111,7 @@ MMHandle::MMHandle() : type_("NO_TYPE"), data_(nullptr)
 {
 }
 
-MMHandle::MMHandle(std::string type, void * bptr, size_t size)
+MMHandle::MMHandle(const char* type, void * bptr, size_t size)
 {
   type_ = type;
   data_ = bptr;
@@ -127,7 +127,7 @@ void * MMHandle::GetRaw()
   return data_;
 }
 
-std::string MMHandle::GetType()
+const char* MMHandle::GetType()
 {
   return type_;
 }

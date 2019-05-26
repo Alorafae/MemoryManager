@@ -19,6 +19,12 @@ int main(void)
   SingleNewTest();
   SingleMMAllocTest(MemMan);
 
+  for (unsigned i = 0; i < 1024; ++i)
+    SingleNewTest();
+
+  for (unsigned i = 0; i < 1024; ++i)
+    SingleMMAllocTest(MemMan);
+
   PERF_FRAME_END
   PERF_PRINT
 

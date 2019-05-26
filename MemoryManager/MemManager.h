@@ -1,6 +1,9 @@
 #pragma once
 
 #include <map>
+#include <typeinfo>
+
+
 #include <string>
 
 #include <list>
@@ -50,19 +53,21 @@ class MMHandle
 {
   public:
     MMHandle();
-    MMHandle(std::string type, void* bptr, size_t size);
+    MMHandle(const char* type, void* bptr, size_t size);
     ~MMHandle();
     
     template <typename T>
     T Data();
 
     void* GetRaw();
-    std::string GetType();
+    const char* GetType();
     size_t GetSize();
   private:
     void* data_;
-    std::string type_;
+    const char* type_;
     size_t size_;
+
+    const char* typei_;
 };
 
 class MemManager
@@ -73,14 +78,16 @@ class MemManager
 
     // maybe instead pass alloc a handle template and instantiate then and there?
     //void Alloc(MMHandle &handle, size_t objSize);
-    MMHandle Alloc(std::string type, size_t objSize);
+    MMHandle Alloc(const char* type, size_t objSize);
+
+
     bool Dealloc(MMHandle handle);
 
     bool AddObjType();
 
   private:
     // strings will be our keys
-    std::map<std::string, PageList*> objectPageMap_;
+    std::map<const char*, PageList*> objectPageMap_;
     //unsigned ObjsPerPage = DEFAULT_OBJECTS_PER_PAGE;
 };
 
