@@ -66,6 +66,10 @@ void PageList::CreatePage(size_t size, unsigned ObjPerPage)
   void* page = malloc(size * ObjPerPage);
   memset(page, 0, size * ObjPerPage);
 
+
+  // raw page with extra ptr space
+  // (size + sizeof(void*)) * objperpage
+
   PageFile pf;
   pf.page = page;
 
@@ -101,8 +105,9 @@ bool PageList::DelBlock(void * p, size_t size)
 
   freeList_.push_back(p);
 
-  if (DEBUG_PRINT_OUTS)
-    printf("block deleted\n");
+#if DEBUG_PRINT_OUTS
+  printf("block deleted\n");
+#endif
 
   return true;
 }

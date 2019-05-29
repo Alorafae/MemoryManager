@@ -24,7 +24,7 @@ struct PageFile
   unsigned inUse = 0;
 };
 
-struct Node
+struct MBlock
 {
   void* next;
 };
