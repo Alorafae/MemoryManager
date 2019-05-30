@@ -62,6 +62,9 @@ PageList::~PageList()
 void PageList::CreatePage(size_t size, unsigned ObjPerPage)
 {
   PERF
+
+  unsigned pSize = sizeof(void*);
+  unsigned totalSize = (size + sizeof(void*)) * ObjPerPage;
   // create the raw page
   void* page = malloc(size * ObjPerPage);
   memset(page, 0, size * ObjPerPage);
@@ -80,8 +83,17 @@ void PageList::CreatePage(size_t size, unsigned ObjPerPage)
   for (unsigned i = 0; i < ObjPerPage; ++i)
   {
     freeList_.push_back(block + (i * size));
+    
   }
 
+  
+  unsigned char* n_block = static_cast<unsigned char*>(page);
+  free_.next = static_cast<MBlock*>(page);
+
+  for (unsigned i = 0; i < ObjPerPage; ++i)
+  {
+    //MBlock* mb = dynamic_cast<MBlock*>(block + (i * (size + sizeof(void*))) );
+  }
 }
 
 void* PageList::GetFreeBlock()

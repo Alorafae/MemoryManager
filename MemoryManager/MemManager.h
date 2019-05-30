@@ -26,7 +26,7 @@ struct PageFile
 
 struct MBlock
 {
-  void* next;
+  MBlock* next;
 };
 
 /*******************
@@ -58,6 +58,7 @@ class PageList
     // located at the beginning of each "chunk" 
     // need a free list
     std::vector<void*> freeList_;
+    MBlock free_;
     // might as well do a in use list too
     std::vector<void*> usedList_;
 
